@@ -1,5 +1,5 @@
 import Table from "@/components/Table";
-import UserForm from "@/components/Form";
+import Modal from "@/components/Modal";
 import { getAllUsers } from "@/helpers/fetcherHandlers";
 
 export default function Home() {
@@ -11,8 +11,7 @@ export default function Home() {
   return (
     <>
       <Table users={data} />
-      {/* TODO: Place form in correct position */}
-      <UserForm />
+      <Modal />
     </>
   );
 }

@@ -1,6 +1,9 @@
+import { observer } from "mobx-react-lite";
 import { deleteFetcher } from "@/helpers/fetcherHandlers";
+import { useUiStore } from "@/stores/uiStore";
 
 const Table = (props: { users: User[] }) => {
+  const uiStore = useUiStore();
   // TODO: Remove any
   const handleDelete = async (e: any) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const Table = (props: { users: User[] }) => {
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <button
             type="button"
+            onClick={() => uiStore.openModal(null)}
             className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Add user
@@ -58,7 +62,10 @@ const Table = (props: { users: User[] }) => {
                       {person.name}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <button className="text-indigo-600 hover:text-indigo-900">
+                      <button
+                        onClick={() => uiStore.openModal(person)}
+                        className="text-indigo-600 hover:text-indigo-900"
+                      >
                         Edit<span className="sr-only">, {person.name}</span>
                       </button>
                     </td>
@@ -82,4 +89,4 @@ const Table = (props: { users: User[] }) => {
   );
 };
 
-export default Table;
+export default observer(Table);

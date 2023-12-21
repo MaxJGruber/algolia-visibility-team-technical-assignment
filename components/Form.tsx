@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFetcher } from "@/helpers/fetcherHandlers";
 
-export default function Form() {
+export default function Form({ user }: { user: User | null }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    } else {
+      setName("");
+      setEmail("");
+    }
+  }, [user]);
 
   // TODO: Find type for any
   const handleSubmit = async (e: any) => {
