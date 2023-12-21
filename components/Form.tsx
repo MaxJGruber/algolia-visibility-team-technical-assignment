@@ -23,11 +23,7 @@ export default function Form() {
 
   return (
     <div className="relative isolate bg-gray-800">
-      <form
-        action="#"
-        method="POST"
-        className="pb-24 pt-20 sm:pb-32 lg:py-48 px-6"
-      >
+      <form className="pb-24 pt-20 sm:pb-32 lg:py-48 px-6">
         <div className="mx-auto max-w-xl">
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div className="sm:col-span-2">

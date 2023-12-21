@@ -21,4 +21,11 @@ export const createFetcher = (user: User) =>
     body: JSON.stringify(user),
   }).then((res) => res.json());
 
+export const updateFetcher = (user: User) =>
+  fetch(BASE_URL + ALL_USERS_ENDPOINT + user.id, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  }).then((res) => res.json());
+
 export const getAllUsers = () => useSwr({ path: ALL_USERS_ENDPOINT }, fetcher);
