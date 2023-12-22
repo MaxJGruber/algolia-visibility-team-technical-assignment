@@ -1,6 +1,9 @@
+import { Inter } from "next/font/google";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { UiStoreProvider } from "@/stores/uiStore";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const navigation = [
   { name: "Users", href: "#", current: true },
@@ -14,8 +17,8 @@ function classNames(...classes: string[]) {
 export default function AppLayout(props: { children: JSX.Element }) {
   return (
     <UiStoreProvider>
-      <div className="min-h-full">
-        <Disclosure as="nav" className="border-b border-gray-200 bg-white">
+      <div className={`min-h-full bg-xenon-900 ${inter.className}`}>
+        <Disclosure as="nav" className="border-b border-gray-200 bg-xenon-900">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -28,9 +31,9 @@ export default function AppLayout(props: { children: JSX.Element }) {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "border-indigo-500 text-gray-900"
-                              : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
-                            "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
+                              ? "border-white text-white font-light"
+                              : "border-transparent text-white hover:border-gray-300 hover:text-gray-100 font-thin hover:font-light",
+                            "inline-flex items-center border-b-2 px-1 pt-1 text-lg font-sora"
                           )}
                         >
                           {item.name}
