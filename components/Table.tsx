@@ -1,4 +1,6 @@
 import { observer } from "mobx-react-lite";
+import HeaderButton from "@/components/HeaderButton";
+import TableButton from "@/components/TableButton";
 import { deleteFetcher } from "@/helpers/fetcherHandlers";
 import { useUiStore } from "@/stores/uiStore";
 
@@ -30,21 +32,15 @@ const Table = (props: { users: User[] }) => {
           </p>
         </div>
         <div className="mt-4 sm:ml-16 sm:mt-0 flex">
-          <button
-            type="button"
+          <HeaderButton
             onClick={() => uiStore.setRunTutorial(true)}
-            className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm ring-2 ring-inset ring-gray-300 hover:bg-secondary-gradient mr-2"
-          >
-            How to use
-          </button>
-          <button
-            type="button"
-            id="add-user-button"
+            label="How to use"
+          />
+          <HeaderButton
             onClick={() => uiStore.openModal(null)}
-            className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bg-xenon-600 hover:bg-blue-gradient"
-          >
-            Add user
-          </button>
+            label="Add user"
+            isPrimary
+          />
         </div>
       </div>
       <div className="mt-8 flow-root">
@@ -83,23 +79,14 @@ const Table = (props: { users: User[] }) => {
                       {person.email}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <button
+                      <TableButton
                         onClick={() => uiStore.openModal(person)}
-                        id="edit"
-                        className="text-xenon-400"
-                      >
-                        Edit<span className="sr-only">, {person.name}</span>
-                      </button>
+                        isEditButton
+                        user={person}
+                      />
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <button
-                        onClick={handleDelete}
-                        value={person.id}
-                        id="delete"
-                        className="text-red-600"
-                      >
-                        Delete<span className="sr-only">, {person.name}</span>
-                      </button>
+                      <TableButton onClick={handleDelete} user={person} />
                     </td>
                   </tr>
                 ))}
