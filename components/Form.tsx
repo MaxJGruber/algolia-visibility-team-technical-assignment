@@ -15,8 +15,9 @@ export default function Form({ user }: { user: User | null }) {
     }
   }, [user]);
 
-  // TODO: Find type for any
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     const user: User = {
       name,

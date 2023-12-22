@@ -4,10 +4,12 @@ import { useUiStore } from "@/stores/uiStore";
 
 const Table = (props: { users: User[] }) => {
   const uiStore = useUiStore();
-  // TODO: Remove any
-  const handleDelete = async (e: any) => {
+
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
-    const res = deleteFetcher(e.target.value);
+    const res = deleteFetcher(e.currentTarget.value);
 
     // TODO: Feedback to the user
     alert("200");
