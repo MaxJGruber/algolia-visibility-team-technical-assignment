@@ -2,6 +2,7 @@ import Table from "@/components/Table";
 import Modal from "@/components/Modal";
 import Banner from "@/components/Banner";
 import { getAllUsers } from "@/helpers/fetcherHandlers";
+import Tutorial from "@/components/Tutorial";
 
 export default function Home() {
   const { data, error, isLoading } = getAllUsers();
@@ -14,6 +15,7 @@ export default function Home() {
       <Table users={data} />
       <Modal />
       <Banner />
+      <Tutorial />
     </>
   );
 }

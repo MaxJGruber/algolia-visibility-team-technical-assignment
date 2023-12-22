@@ -18,7 +18,7 @@ const Table = (props: { users: User[] }) => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div id="table" className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold font-sora leading-6 text-white">
@@ -29,9 +29,17 @@ const Table = (props: { users: User[] }) => {
             email.
           </p>
         </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none lg:flex">
           <button
             type="button"
+            onClick={() => uiStore.setRunTutorial(true)}
+            className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm ring-2 ring-inset ring-gray-300 hover:bg-secondary-gradient lg:mr-2"
+          >
+            How to use
+          </button>
+          <button
+            type="button"
+            id="add-user-button"
             onClick={() => uiStore.openModal(null)}
             className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bg-xenon-600 hover:bg-blue-gradient"
           >
@@ -77,6 +85,7 @@ const Table = (props: { users: User[] }) => {
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <button
                         onClick={() => uiStore.openModal(person)}
+                        id="edit"
                         className="text-xenon-400"
                       >
                         Edit<span className="sr-only">, {person.name}</span>
@@ -86,6 +95,7 @@ const Table = (props: { users: User[] }) => {
                       <button
                         onClick={handleDelete}
                         value={person.id}
+                        id="delete"
                         className="text-red-600"
                       >
                         Delete<span className="sr-only">, {person.name}</span>

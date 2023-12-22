@@ -11,12 +11,16 @@ type UiContext = {
   closeModal: () => void;
   openBanner: (alert: string, isSuccess: boolean) => void;
   closeBanner: () => void;
+
+  runTutorial: boolean;
+  setRunTutorial: (runTutorial: boolean) => void;
 };
 
 const uiStoreContext = createContext<UiContext | null>(null);
 
 export const UiStoreProvider = (props: { children: any }) => {
   const uiStore = useLocalObservable(() => ({
+    // Handle API responses
     showModal: false,
     targetUser: null,
     showBanner: false,
@@ -39,6 +43,12 @@ export const UiStoreProvider = (props: { children: any }) => {
       this.isSuccess = null;
       this.alert = "";
       this.showBanner = false;
+    },
+
+    // Handle tutorial
+    runTutorial: false,
+    setRunTutorial(runTutorial: boolean) {
+      this.runTutorial = runTutorial;
     },
   }));
   return (
