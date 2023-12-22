@@ -4,8 +4,13 @@ import { useLocalObservable } from "mobx-react-lite";
 type UiContext = {
   showModal: boolean;
   targetUser: User | null;
+  showBanner: boolean;
+  alert: string | "";
+  isSuccess: boolean | null;
   openModal: (user: User | null) => void;
   closeModal: () => void;
+  openBanner: (alert: string, isSuccess: boolean) => void;
+  closeBanner: () => void;
 };
 
 const uiStoreContext = createContext<UiContext | null>(null);
@@ -14,6 +19,9 @@ export const UiStoreProvider = (props: { children: any }) => {
   const uiStore = useLocalObservable(() => ({
     showModal: false,
     targetUser: null,
+    showBanner: false,
+    alert: "",
+    isSuccess: null,
     openModal(user: User | null) {
       if (user) this.targetUser = user;
       this.showModal = true;
@@ -21,6 +29,16 @@ export const UiStoreProvider = (props: { children: any }) => {
     closeModal() {
       this.targetUser = null;
       this.showModal = false;
+    },
+    openBanner(alert: string, isSuccess: boolean) {
+      this.isSuccess = isSuccess;
+      this.alert = alert;
+      this.showBanner = true;
+    },
+    closeBanner() {
+      this.isSuccess = null;
+      this.alert = "";
+      this.showBanner = false;
     },
   }));
   return (

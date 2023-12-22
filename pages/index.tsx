@@ -1,5 +1,6 @@
 import Table from "@/components/Table";
 import Modal from "@/components/Modal";
+import Banner from "@/components/Banner";
 import { getAllUsers } from "@/helpers/fetcherHandlers";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <Table users={data} />
       <Modal />
+      <Banner />
     </>
   );
 }

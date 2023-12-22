@@ -9,12 +9,14 @@ const Table = (props: { users: User[] }) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const res = deleteFetcher(e.currentTarget.value);
+    await deleteFetcher(e.currentTarget.value);
 
-    // TODO: Feedback to the user
-    alert("200");
-    return await res;
+    uiStore.openBanner(
+      "This user has been successfully deleted from your list of users.",
+      true
+    );
   };
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">

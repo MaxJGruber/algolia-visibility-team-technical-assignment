@@ -1,35 +1,48 @@
 import { useState, useEffect } from "react";
+import Alert from "@/components/Alert";
 import { createFetcher } from "@/helpers/fetcherHandlers";
+import { useUiStore } from "@/stores/uiStore";
 
-export default function Form({ user }: { user: User | null }) {
+export default function Form({ targetUser }: { targetUser: User | null }) {
+  const uiStore = useUiStore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
+    if (targetUser) {
+      setName(targetUser.name);
+      setEmail(targetUser.email);
     } else {
       setName("");
       setEmail("");
     }
-  }, [user]);
+  }, [targetUser]);
 
   const handleSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    setAlert(false);
+    if (!name || !email) {
+      setAlert(true);
+      return;
+    }
     const user: User = {
       name,
       email,
     };
 
-    // TODO: Handle feedback to user
-    const res = createFetcher(user);
-    alert(200);
+    const res = await createFetcher(user);
+    uiStore.openBanner(
+      `${res.name} has been ${
+        targetUser ? "updated in" : "added to"
+      } your list of users.`,
+      true
+    );
     setName("");
     setEmail("");
-    return res;
+    uiStore.closeModal();
   };
 
   return (
@@ -94,9 +107,10 @@ export default function Form({ user }: { user: User | null }) {
               onClick={handleSubmit}
               className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bg-xenon-600 hover:bg-blue-gradient"
             >
-              {user ? "Update existing user" : "Add new user"}
+              {targetUser ? "Update existing user" : "Add new user"}
             </button>
           </div>
+          <div className="mt-8">{alert && <Alert />}</div>
         </div>
       </form>
     </div>
