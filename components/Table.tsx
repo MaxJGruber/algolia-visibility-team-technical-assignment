@@ -29,11 +29,11 @@ const Table = (props: { users: User[] }) => {
             email.
           </p>
         </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none lg:flex">
+        <div className="mt-4 sm:ml-16 sm:mt-0 flex">
           <button
             type="button"
             onClick={() => uiStore.setRunTutorial(true)}
-            className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm ring-2 ring-inset ring-gray-300 hover:bg-secondary-gradient lg:mr-2"
+            className="block rounded-md px-3 py-4 text-center text-sm font-semibold text-white shadow-sm ring-2 ring-inset ring-gray-300 hover:bg-secondary-gradient mr-2"
           >
             How to use
           </button>
@@ -61,7 +61,7 @@ const Table = (props: { users: User[] }) => {
                   </th>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold font-sora text-white sm:pl-0"
+                    className="md:hidden lg:block py-3.5 pl-4 pr-3 text-left text-sm font-semibold font-sora text-white sm:pl-0"
                   >
                     Email
                   </th>
@@ -79,7 +79,7 @@ const Table = (props: { users: User[] }) => {
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
                       {person.name}
                     </td>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0 hidden md:block">
                       {person.email}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
